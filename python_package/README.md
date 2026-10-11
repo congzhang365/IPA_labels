@@ -97,9 +97,21 @@ english = ipa_labels.inventory(iso639_3="eng")
 for inv in english:
     print(inv["inventory_id"], inv["language"], inv["doculect"])
     print(inv["source"])
-    for segment in inv["segments"]:
-        print(segment["symbol"], segment["marginal"])
+    symbols = [segment["symbol"] for segment in inv["segments"]]
+    print(symbols)
 ```
+
+Example output for one of the English records is:
+
+```text
+160 English English
+oconner1973;gimson1962;halle1973;fudge1975;trnka1968
+['aː', 'æ', 'ɐ', 'ɒ', 'b', 'd', 'ð', 'd̠ʒ', 'e̞', 'ə', 'əː', 'f', 'ɡ', 'h', 'iː', 'ɪ', 'j', 'kʰ', 'l', 'm', 'n', 'ŋ', 'o̞ː', 'ɔ', 'pʰ', 'ɻ', 's', 'ʃ', 'tʰ', 't̠ʃ', 'uː', 'ʊ', 'v', 'w', 'ʍ', 'x', 'z', 'ʒ', 'ʔ', 'θ']
+```
+
+The complete record also reports `iso639_3='eng'`, `glottocode='stan1293'`,
+and 40 segment records. Your output may contain several blocks if more than
+one English inventory matches.
 
 You can select records with `language=`, `iso639_3=`, `glottocode=`, or
 `inventory_id=`. A query can return zero, one, or many inventories, so inspect

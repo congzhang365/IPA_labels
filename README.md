@@ -100,6 +100,8 @@ ipa_labels.lookup(
 
 # Explore PHOIBLE inventories
 english = ipa_labels.inventory(language="English")
+symbols = [segment["symbol"] for segment in english[0]["segments"]]
+print(symbols)
 ```
 
 ### R
@@ -122,6 +124,8 @@ ipalookup(
 
 # Explore PHOIBLE inventories
 english <- ipainventory(iso639_3 = "eng")
+symbols <- vapply(english[[1]]$segments, `[[`, character(1), "symbol")
+print(symbols)
 ```
 
 Both packages also support free-text search: `ipa_labels.query()` in Python and `ipaquery()` in R.

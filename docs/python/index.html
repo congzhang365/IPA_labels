@@ -64,8 +64,10 @@ for name in ["consonantal", "sonorant", "continuant", "nasal", "labial"]:
 for inv in english:
     print(inv["inventory_id"], inv["language"], inv["doculect"])
     print(inv["iso639_3"], inv["glottocode"], inv["source"])
-    for segment in inv["segments"]:
-        print(segment["symbol"], segment["marginal"])</code></pre><p>Other selectors are <code>language=</code>, <code>glottocode=</code>, and <code>inventory_id=</code>.</p>
+    symbols = [segment["symbol"] for segment in inv["segments"]]
+    print(symbols)</code></pre><p>For one English record, the output is:</p><pre><code>160 English English
+eng stan1293 oconner1973;gimson1962;halle1973;fudge1975;trnka1968
+['aː', 'æ', 'ɐ', 'ɒ', 'b', 'd', 'ð', 'd̠ʒ', 'e̞', 'ə', 'əː', 'f', 'ɡ', 'h', 'iː', 'ɪ', 'j', 'kʰ', 'l', 'm', 'n', 'ŋ', 'o̞ː', 'ɔ', 'pʰ', 'ɻ', 's', 'ʃ', 'tʰ', 't̠ʃ', 'uː', 'ʊ', 'v', 'w', 'ʍ', 'x', 'z', 'ʒ', 'ʔ', 'θ']</code></pre><p>Other selectors are <code>language=</code>, <code>glottocode=</code>, and <code>inventory_id=</code>. More than one inventory may match. The <code>marginal</code> field can be inspected separately for each segment.</p>
 <h2>8. Keep the older API while you learn</h2><pre><code>ipa_labels.get("p", "place")
 ipa_labels.lookup(place="bilabial")
 ipa_labels.values("place", type="consonant", unique=True)

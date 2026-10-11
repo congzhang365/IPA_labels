@@ -154,11 +154,26 @@ for (inv in english) {
   cat("Source:", inv$source, "\n")
   cat("Number of segments:", length(inv$segments), "\n")
 
-  first_segment <- inv$segments[[1]]
-  print(first_segment$symbol)
-  print(first_segment$marginal)
+  symbols <- vapply(inv$segments, `[[`, character(1), "symbol")
+  print(symbols)
 }
 ```
+
+A shortened example of the output is:
+
+```text
+160 English English
+Source: oconner1973;gimson1962;halle1973;fudge1975;trnka1968
+Number of segments: 40
+[1] "aː" "æ" "ɐ" "ɒ" "b" "d" "ð" "d̠ʒ" "e̞" "ə" "əː"
+[12] "f" "ɡ" "h" "iː" "ɪ" "j" "kʰ" "l" "m" "n" "ŋ" "o̞ː"
+[23] "ɔ" "pʰ" "ɻ" "s" "ʃ" "tʰ" "t̠ʃ" "uː" "ʊ" "v" "w" "ʍ"
+[36] "x" "z" "ʒ" "ʔ" "θ"
+```
+
+The same record also contains `iso639_3 = "eng"` and
+`glottocode = "stan1293"`. More than one record may be returned for a
+language, so loop over `english` when you want to inspect them all.
 
 Use `language`, `iso639_3`, `glottocode`, or `inventory_id` to narrow the
 results. Because the function can return zero, one, or many records, do not

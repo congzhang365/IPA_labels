@@ -158,8 +158,17 @@ for inv in english:
     print(inv["inventory_id"], inv["language"], inv["doculect"])
     print(inv["iso639_3"], inv["glottocode"], inv["source"])
     print("segments:", len(inv["segments"]))
-    for segment in inv["segments"]:
-        print(segment["symbol"], segment["marginal"])
+    symbols = [segment["symbol"] for segment in inv["segments"]]
+    print(symbols)
+```
+
+A shortened example of the output is:
+
+```text
+160 English English
+eng stan1293 oconner1973;gimson1962;halle1973;fudge1975;trnka1968
+segments: 40
+['aː', 'æ', 'ɐ', 'ɒ', 'b', 'd', 'ð', 'd̠ʒ', 'e̞', 'ə', 'əː', 'f', 'ɡ', 'h', 'iː', 'ɪ', 'j', 'kʰ', 'l', 'm', 'n', 'ŋ', 'o̞ː', 'ɔ', 'pʰ', 'ɻ', 's', 'ʃ', 'tʰ', 't̠ʃ', 'uː', 'ʊ', 'v', 'w', 'ʍ', 'x', 'z', 'ʒ', 'ʔ', 'θ']
 ```
 
 There may be no matching inventory, one matching inventory, or several
