@@ -11,17 +11,17 @@ The package is released under the [MIT License](LICENSE).
 
 ## Installation
 
-To install the package in editable mode locally, navigate to the `python_package` folder and run:
+Install directly from GitHub:
 
-```bash
-pip install -e .
+```powershell
+py -m pip install "git+https://github.com/congzhang365/IPA_labels.git#subdirectory=python_package"
 ```
 
 The installed package exposes its release version as `ipa_labels.__version__`.
 
 ## Features
 
-- **Compressed Database Loading**: Reads the generated UTF-8 compressed JSON database. The repository-level `ipa_symbols.csv` remains the editable source of truth.
+- **Compressed Database Loading**: Reads the generated UTF-8 compressed JSON database shipped with the package.
 - **Structured Searches (`lookup`)**: Find symbols by specifying values for columns like `voicing`, `place`, `manner`, `type`, `height`, `roundedness`, etc.
 - **Free-Text Search (`query`)**: Search for multiple terms case-insensitively across all columns (e.g., searching `'voiced bilabial'` will find matching phonemes).
 - **Flexible Field Selection**: Choose to return complete records, a single column as a list of values, or a subset of columns.
@@ -58,6 +58,53 @@ p.description.unicode_name
 The five groups are `symbol`, `code`, `label`, `features`, and `description`.
 See [TUTORIAL.md](TUTORIAL.md) for defaults, aliases, missing values, multiple
 results, and PHOIBLE inventory examples.
+
+### PHOIBLE features
+
+The `features` group contains structured segment features from the bundled
+PHOIBLE 2.0.1 snapshot. These are different from the readable IPA labels:
+`p.label.place` says that `p` is **bilabial**, while
+`p.features.labial` gives the PHOIBLE feature value `True`. Feature values are
+usually `True` or `False`; `None` means that the snapshot has no value for that
+feature.
+
+```python
+p = ipa_labels.get("p")
+
+p.features.consonantal
+p.features.labial
+p.features.nasal
+p.features["spreadGlottis"]
+
+# See every feature supplied for this symbol
+print(p.features.default)
+```
+
+Use `label` when you want a human-readable phonetic description, and
+`features` when you want a machine-readable feature bundle for comparison or
+analysis. The package does not invent feature values when PHOIBLE is missing
+one.
+
+### PHOIBLE language inventories
+
+`inventory()` returns a list because a language may have several inventories or
+doculect records. Each result keeps its own language, doculect, source, URL,
+inventory ID, and list of segments; records are not silently merged.
+
+```python
+english = ipa_labels.inventory(iso639_3="eng")
+
+for inv in english:
+    print(inv["inventory_id"], inv["language"], inv["doculect"])
+    print(inv["source"])
+    for segment in inv["segments"]:
+        print(segment["symbol"], segment["marginal"])
+```
+
+You can select records with `language=`, `iso639_3=`, `glottocode=`, or
+`inventory_id=`. A query can return zero, one, or many inventories, so inspect
+the list rather than assuming that the first result represents the whole
+language.
 
 ### 1. Free-Text Queries (`query`)
 

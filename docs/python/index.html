@@ -4,8 +4,7 @@
 <p class="lead">A gentle, example-led introduction for researchers who are comfortable with Python basics but are new to this package.</p><h1>Python manual</h1>
 <div class="callout"><strong>Reading route:</strong> run the first example, learn the five groups, then choose either lookup, feature, or inventory work. You do not need to memorise the whole database.</div>
 <h2>Before the technical details</h2><p>Think of <code>ipa_labels</code> as a box of information cards. Each card describes one IPA symbol. The card for <code>p</code> tells you what kind of sound it is and gives you its different writing and coding systems.</p><p>The symbol is the thing you are looking up. A group is a section on its card. So <code>p.label.place</code> means: “on the card for <code>p</code>, open the label section and show me the place of articulation”.</p><p>You do not need to learn every field before starting. Ask one small question first, then explore the other sections of the same record.</p>
-<h2>1. Install and make a first query</h2><p>For a local checkout, install the package in editable mode:</p><pre><code>cd python_package
-py -3.12 -m pip install -e .</code></pre><p>Now ask for the record for <code>p</code>:</p><pre><code>import ipa_labels
+<h2>1. Install and make a first query</h2><p>Install the current version directly from GitHub:</p><pre><code>py -m pip install "git+https://github.com/congzhang365/IPA_labels.git#subdirectory=python_package"</code></pre><p>Now ask for the record for <code>p</code>:</p><pre><code>import ipa_labels
 
 p = ipa_labels.get("p")
 print(p.symbol.ipa)
@@ -57,13 +56,14 @@ print(consonant.label.manner)   # plosive</code></pre><p><code>closeness</code> 
 for match in matches:
     print(match)</code></pre><p>Use <code>fields="symbol"</code> when you want a simple list. Grouped criteria are also supported:</p><pre><code>ipa_labels.lookup(label={"place": "bilabial"}, fields="symbol")
 ipa_labels.lookup(code={"unicode": "U+0070"}, fields="symbol")</code></pre>
-<h2>6. PHOIBLE features</h2><p>Labels and features answer different questions. <code>p.label.place</code> is a readable IPA label; <code>p.features.labial</code> is a structured PHOIBLE feature value.</p><pre><code>p = ipa_labels.get("p")
+<h2>6. PHOIBLE features</h2><p>Labels and features answer different questions. <code>p.label.place</code> is a readable IPA label; <code>p.features.labial</code> is a structured PHOIBLE feature value. Use labels when you want a description for a person to read, and features when you want values to compare or analyse in code.</p><pre><code>p = ipa_labels.get("p")
 for name in ["consonantal", "sonorant", "continuant", "nasal", "labial"]:
     print(name, p.features[name])</code></pre><p>Feature values are normally <code>True</code>, <code>False</code>, or <code>None</code> when PHOIBLE does not provide a value.</p>
-<h2>7. Language inventories</h2><p>Inventories retain language, doculect, source, marginal status, and segment membership.</p><pre><code>english = ipa_labels.inventory(iso639_3="eng")
+<h2>7. Language inventories</h2><p>An inventory is a record of the sounds reported for a particular language or doculect. The function returns a list because one language can have several records from different sources. Each record retains its own language, doculect, ISO code, Glottocode, source, URL, inventory ID, and segment list.</p><pre><code>english = ipa_labels.inventory(iso639_3="eng")
 
 for inv in english:
-    print(inv["inventory_id"], inv["language"], inv["source"])
+    print(inv["inventory_id"], inv["language"], inv["doculect"])
+    print(inv["iso639_3"], inv["glottocode"], inv["source"])
     for segment in inv["segments"]:
         print(segment["symbol"], segment["marginal"])</code></pre><p>Other selectors are <code>language=</code>, <code>glottocode=</code>, and <code>inventory_id=</code>.</p>
 <h2>8. Keep the older API while you learn</h2><pre><code>ipa_labels.get("p", "place")

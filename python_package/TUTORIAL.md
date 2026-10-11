@@ -41,9 +41,10 @@ symbol, ask one question, and then explore the other sections of its card.
 
 ## Install and import
 
+For the current GitHub version, run:
+
 ```powershell
-cd python_package
-py -3.12 -m pip install -e .
+py -m pip install "git+https://github.com/congzhang365/IPA_labels.git#subdirectory=python_package"
 ```
 
 ```python
@@ -120,19 +121,33 @@ string; the structured API converts that to `None`.
 ## PHOIBLE features and inventories
 
 PHOIBLE features are separate from the package's readable IPA labels. They are
-structured phonological feature values, for example:
+structured phonological feature values intended for comparison and analysis.
+For example, `p.label.place` is the readable IPA description `bilabial`, while
+`p.features.labial` is a PHOIBLE feature value. They answer related but
+different questions:
 
 ```python
 p = ipa_labels.get("p")
-print(p.features["continuant"])
-print(p.features["spreadGlottis"])
+print(p.label.place)                 # bilabial
+print(p.features["consonantal"])    # True
+print(p.features["labial"])         # True
+print(p.features["continuant"])     # False
+print(p.features["spreadGlottis"])  # usually False or None, depending on symbol
+print(p.features.default)            # all supplied PHOIBLE fields
 ```
 
 The bundled PHOIBLE snapshot is version 2.0.1. Its feature values are converted
-to Python booleans (`True`/`False`) and missing values to `None`.
+to Python booleans (`True`/`False`) and missing values to `None`. `None` means
+that PHOIBLE does not provide a value; the package does not guess one. Feature
+names include articulatory and laryngeal properties such as `consonantal`,
+`sonorant`, `continuant`, `nasal`, `labial`, `coronal`, `dorsal`, `high`,
+`low`, `front`, `back`, `spreadGlottis`, and `constrictedGlottis`. The exact
+fields available can vary by record, so `p.features.default` is the safest way
+to inspect the complete mapping.
 
-Inventories retain language, doculect, source, marginal status, and segment
-membership. Inventories are not merged merely because they share a language:
+Inventories retain language, doculect, ISO 639-3 code, Glottocode, source, URL,
+marginal status, and segment membership. Inventories are not merged merely
+because they share a language:
 
 ```python
 english = ipa_labels.inventory(language="English")
@@ -140,10 +155,17 @@ english_iso = ipa_labels.inventory(iso639_3="eng")
 one_inventory = ipa_labels.inventory(inventory_id=123)
 
 for inv in english:
-    print(inv["inventory_id"], inv["language"], len(inv["segments"]))
+    print(inv["inventory_id"], inv["language"], inv["doculect"])
+    print(inv["iso639_3"], inv["glottocode"], inv["source"])
+    print("segments:", len(inv["segments"]))
     for segment in inv["segments"]:
         print(segment["symbol"], segment["marginal"])
 ```
+
+There may be no matching inventory, one matching inventory, or several
+matching inventories. Always loop over the returned list when you want to see
+all results. A segment record can also include a parameter ID, allophone
+information, and its own source.
 
 ## Updating data
 

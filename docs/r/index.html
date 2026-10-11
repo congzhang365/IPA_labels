@@ -4,10 +4,10 @@
 <p class="lead">A gentle, example-led introduction for researchers using RStudio or R scripts to work with IPA data.</p><h1>R manual</h1>
 <div class="callout"><strong>Reading route:</strong> copy the first example into RStudio, inspect the nested list with <code>str()</code>, then move on to searches and inventories.</div>
 <h2>Before the technical details</h2><p>Think of <code>ipa_labels</code> as a box of information cards. Each card describes one IPA symbol. The card for <code>p</code> tells you what kind of sound it is and gives you its different writing and coding systems.</p><p>The symbol is the thing you are looking up. A group is a section on its card. In R, <code>p$label$place</code> means: “on the card for <code>p</code>, open the label section and show me the place of articulation”.</p><p>You do not need to learn every field before starting. Ask one small question first, then explore the other sections of the same record.</p>
-<h2>1. Install and load</h2><pre><code>install.packages("jsonlite")
-remotes::install_local("r_package/ipa.labels")
+<h2>1. Install and load</h2><p>Install the current version directly from GitHub:</p><pre><code>if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
+remotes::install_github("congzhang365/IPA_labels", subdir = "r_package/ipa.labels")
 
-library(ipa.labels)</code></pre><p>For a local checkout, replace the path with the full path to the R package directory.</p>
+library(ipa.labels)</code></pre>
 <h2>2. Make a first query</h2><pre><code>p <- ipaget("p")
 
 p$symbol$ipa
@@ -57,16 +57,18 @@ close_vowels <- ipalookup(
   criteria = list(type = "vowel", frontness = "front"),
   fields = "symbol"
 )</code></pre>
-<h2>7. PHOIBLE features</h2><pre><code>p <- ipaget("p")
+<h2>7. PHOIBLE features</h2><p>Labels and features answer different questions. <code>p$label$place</code> is the readable IPA description “bilabial”, while <code>p$features$labial</code> is a structured PHOIBLE value. Use labels for explanations and features for comparison or analysis.</p><pre><code>p <- ipaget("p")
 p$features$consonantal
 p$features$labial
 p$features$nasal
-p$features$spreadGlottis</code></pre><p>Feature values are usually <code>TRUE</code>, <code>FALSE</code>, or <code>NA</code>. Labels and PHOIBLE features are deliberately separate.</p>
-<h2>8. Language inventories</h2><pre><code>english <- ipainventory(iso639_3 = "eng")
+p$features$spreadGlottis
+names(p$features)</code></pre><p>Feature values are usually <code>TRUE</code>, <code>FALSE</code>, or <code>NA</code>. <code>NA</code> means PHOIBLE does not provide a value; it is not an inferred false value. Labels and PHOIBLE features are deliberately separate.</p>
+<h2>8. Language inventories</h2><p>An inventory is a sound-system record for a language or doculect. The function returns a list because a language can have several records from different sources. Each record keeps its own inventory ID, language, doculect, ISO code, Glottocode, source, URL, and segment list.</p><pre><code>english <- ipainventory(iso639_3 = "eng")
 
 for (inv in english) {
   print(inv$inventory_id)
   print(inv$language)
+  print(inv$doculect)
   print(inv$source)
   print(length(inv$segments))
 }</code></pre><p>Use <code>language</code>, <code>glottocode</code>, or <code>inventory_id</code> when you need a narrower result.</p>

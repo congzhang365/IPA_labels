@@ -9,19 +9,16 @@ PHOIBLE features and inventories.
 
 ## Installation
 
-You can install `ipa.labels` locally using the `devtools` package. Open R and run:
+Install directly from GitHub:
 
 ```R
-# Install devtools if not already installed
-if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")
-
-# Install ipa.labels from the local folder
-devtools::install("c:/Users/Cong/OneDrive - Newcastle University/Documents/Website/IPA/r_package/ipa.labels")
+if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
+remotes::install_github("congzhang365/IPA_labels", subdir = "r_package/ipa.labels")
 ```
 
 ## Features
 
-- **Compressed Database Loading**: Reads the generated UTF-8 compressed JSON database. The repository-level `ipa_symbols.csv` remains the editable source of truth.
+- **Compressed Database Loading**: Reads the generated UTF-8 compressed JSON database shipped with the package.
 - **Structured Searches (`ipalookup`)**: Find symbols by specifying values for columns like `voicing`, `place`, `manner`, `type`, `height`, `roundedness`, etc.
 - **Free-Text Search (`ipaquery`)**: Search for multiple terms case-insensitively across all columns (e.g., searching `'voiced bilabial'` will find matching phonemes).
 - **Flexible Field Selection**: Choose to return complete records as a data frame, a single column as a flat vector, or a subset of columns.
@@ -116,6 +113,56 @@ p$description$unicode_name
 
 english <- ipainventory(iso639_3 = "eng")
 ```
+
+### PHOIBLE features
+
+The `features` group contains structured segment features from the bundled
+PHOIBLE 2.0.1 snapshot. It is intentionally separate from the readable IPA
+`label` group. For example, `p$label$place` is the human-readable label
+“bilabial”, whereas `p$features$labial` is the PHOIBLE feature value `TRUE`.
+
+```R
+p <- ipaget("p")
+
+p$features$consonantal
+p$features$labial
+p$features$nasal
+p$features$spreadGlottis
+
+# Inspect every feature supplied for this symbol
+names(p$features)
+unclass(p$features)
+```
+
+Feature values are normally `TRUE`, `FALSE`, or `NA`. `NA` means that the
+bundled PHOIBLE snapshot does not provide a value; it does not mean that the
+feature has been inferred to be false. Use `label` for readable phonetic
+descriptions and `features` for structured analysis.
+
+### PHOIBLE language inventories
+
+`ipainventory()` returns a list. A language can have several PHOIBLE records,
+for example because different doculects or sources were used. Each record
+keeps its own inventory ID, language, doculect, ISO code, Glottocode, source,
+URL, and segment list.
+
+```R
+english <- ipainventory(iso639_3 = "eng")
+
+for (inv in english) {
+  cat(inv$inventory_id, inv$language, inv$doculect, "\n")
+  cat("Source:", inv$source, "\n")
+  cat("Number of segments:", length(inv$segments), "\n")
+
+  first_segment <- inv$segments[[1]]
+  print(first_segment$symbol)
+  print(first_segment$marginal)
+}
+```
+
+Use `language`, `iso639_3`, `glottocode`, or `inventory_id` to narrow the
+results. Because the function can return zero, one, or many records, do not
+assume that the first result is the only inventory for a language.
 
 ## Reference-resource checks
 
