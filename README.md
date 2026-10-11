@@ -54,13 +54,10 @@ versioned PHOIBLE 2.0.1 snapshot with segment features and inventories.
 
 ## Development
 
-Edit `ipa_symbols.csv`, then regenerate both packages:
-
-```powershell
-py -3.12 build_package_data.py
-py -3.12 test_python_package.py
-& 'C:\Program Files\R\R-4.6.1\bin\Rscript.exe' test_r_package.R
-```
+The public repository contains the generated package data, so users can
+install and use both packages without access to the private source CSV. The
+source CSV and data-generation scripts remain in the maintainer's local
+working directory and are intentionally excluded from GitHub.
 
 The manuals are plain HTML in `docs/`, so they can be published with GitHub
 Pages without a documentation build step.

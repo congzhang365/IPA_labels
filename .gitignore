@@ -11,3 +11,9 @@ __pycache__/
 .idea/
 .Rhistory
 .Rproj.user/
+
+# Private maintainer-only data-generation notes and scripts.
+build_package_data.py
+copy_csv.py
+generate_csv.py
+instructions.md
