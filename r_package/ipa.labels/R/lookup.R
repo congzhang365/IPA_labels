@@ -5,16 +5,16 @@
 #' @return A data frame containing the IPA database.
 #' @importFrom utils read.csv
 load_ipa_data <- function() {
-  data_path <- system.file("extdata", "ipa_symbols.json.gz", package = "ipa_labels")
+  data_path <- system.file("extdata", "ipa_symbols.json.gz", package = "ipa.labels")
   if (data_path == "") {
     # Fallback to local workspace paths if package is not fully installed yet (for tests)
     possible_paths <- c(
       file.path(getwd(), "inst", "extdata", "ipa_symbols.json.gz"),
       file.path(getwd(), "ipa_symbols.json.gz"),
-      file.path(getwd(), "r_package", "ipa_labels", "inst", "extdata", "ipa_symbols.json.gz"),
+      file.path(getwd(), "r_package", "ipa.labels", "inst", "extdata", "ipa_symbols.json.gz"),
       file.path(getwd(), "inst", "extdata", "ipa_symbols.csv"),
       file.path(getwd(), "ipa_symbols.csv"),
-      file.path(getwd(), "r_package", "ipa_labels", "inst", "extdata", "ipa_symbols.csv")
+      file.path(getwd(), "r_package", "ipa.labels", "inst", "extdata", "ipa_symbols.csv")
     )
     for (p in possible_paths) {
       if (file.exists(p)) {
@@ -40,11 +40,11 @@ load_ipa_data <- function() {
 }
 
 load_ipa_json <- function(filename, default = list()) {
-  data_path <- system.file("extdata", filename, package = "ipa_labels")
+  data_path <- system.file("extdata", filename, package = "ipa.labels")
   if (data_path == "") {
     possible_paths <- c(
       file.path(getwd(), "inst", "extdata", filename),
-      file.path(getwd(), "r_package", "ipa_labels", "inst", "extdata", filename)
+      file.path(getwd(), "r_package", "ipa.labels", "inst", "extdata", filename)
     )
     for (p in possible_paths) if (file.exists(p)) { data_path <- p; break }
   }

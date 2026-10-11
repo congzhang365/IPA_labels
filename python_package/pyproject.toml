@@ -9,7 +9,7 @@ description = "A comprehensive IPA dictionary package with dynamic lookup functi
 readme = "README.md"
 requires-python = ">=3.6"
 authors = [
-  { name = "Cong" }
+  { name = "Cong Zhang", email = "cong.zhang@newcastle.ac.uk" }
 ]
 license = { file = "LICENSE" }
 classifiers = [

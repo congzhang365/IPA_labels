@@ -1,8 +1,8 @@
 # Sourcing package logic directly for verification
-source("r_package/ipa_labels/R/lookup.R")
+source("r_package/ipa.labels/R/lookup.R")
 
 test_r_package <- function() {
-  cat("=== Testing R Package ipa_labels ===\n")
+  cat("=== Testing R Package ipa.labels ===\n")
   
   # Test 1: Lookup symbol 'p'
   cat("\nTest 1: Lookup symbol 'p' details...\n")

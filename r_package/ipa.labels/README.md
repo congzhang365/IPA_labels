@@ -1,22 +1,22 @@
-# ipa_labels
+# ipa.labels
 
 A comprehensive, R-based phonetic database and lookup utility for the International Phonetic Alphabet (IPA).
 
-`ipa_labels` allows you to look up IPA symbols by their descriptions, names, Hex/Decimal values, TIPA LaTeX macros, AF II codes, SAMPA/X-SAMPA representation, and ARPABET mappings.
+`ipa.labels` allows you to look up IPA symbols by their descriptions, names, Hex/Decimal values, TIPA LaTeX macros, AF II codes, SAMPA/X-SAMPA representation, and ARPABET mappings.
 
 Version 0.2 also provides a nested record interface with `ipaget("p")` and
 PHOIBLE features and inventories.
 
 ## Installation
 
-You can install `ipa_labels` locally using the `devtools` package. Open R and run:
+You can install `ipa.labels` locally using the `devtools` package. Open R and run:
 
 ```R
 # Install devtools if not already installed
 if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")
 
-# Install ipa_labels from the local folder
-devtools::install("c:/Users/Cong/OneDrive - Newcastle University/Documents/Website/IPA/r_package/ipa_labels")
+# Install ipa.labels from the local folder
+devtools::install("c:/Users/Cong/OneDrive - Newcastle University/Documents/Website/IPA/r_package/ipa.labels")
 ```
 
 ## Features
@@ -38,7 +38,7 @@ Python and R packages.
 Load the library in R:
 
 ```R
-library(ipa_labels)
+library(ipa.labels)
 ```
 
 ### 1. Free-Text Queries (`ipaquery`)

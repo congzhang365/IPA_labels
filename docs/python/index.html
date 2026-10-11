@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ipa-labels Python manual</title><link rel="stylesheet" href="../assets/style.css"></head>
-<body><div class="wrap"><header><a href="../"><img src="../assets/ipa-labels-logo.svg" alt="ipa-labels home"></a><nav><a href="../">Documentation home</a><a href="../r/">R manual</a><a href="../../python_package/README.md">Package README</a></nav></header><main>
+<body><div class="wrap"><header><a href="../"><img src="../assets/ipa_labels_python.png" alt="ipa-labels Python logo" width="260"></a><nav><a href="../">Documentation home</a><a href="../r/">R manual</a><a href="https://github.com/congzhang365/IPA_labels/blob/main/python_package/README.md">Package README</a></nav></header><main>
 <p class="lead">A gentle, example-led introduction for researchers who are comfortable with Python basics but are new to this package.</p><h1>Python manual</h1>
 <div class="callout"><strong>Reading route:</strong> run the first example, learn the five groups, then choose either lookup, feature, or inventory work. You do not need to memorise the whole database.</div>
 <h2>Before the technical details</h2><p>Think of <code>ipa_labels</code> as a box of information cards. Each card describes one IPA symbol. The card for <code>p</code> tells you what kind of sound it is and gives you its different writing and coding systems.</p><p>The symbol is the thing you are looking up. A group is a section on its card. So <code>p.label.place</code> means: “on the card for <code>p</code>, open the label section and show me the place of articulation”.</p><p>You do not need to learn every field before starting. Ask one small question first, then explore the other sections of the same record.</p>
@@ -69,5 +69,5 @@ for inv in english:
 <h2>8. Keep the older API while you learn</h2><pre><code>ipa_labels.get("p", "place")
 ipa_labels.lookup(place="bilabial")
 ipa_labels.values("place", type="consonant", unique=True)
-ipa_labels.query("voiced bilabial plosive", fields="symbol")</code></pre><p>Use <a href="https://github.com/congzhang365/ipa-labels/blob/main/python_package/TUTORIAL.md">the longer source tutorial</a> for custom data and error handling.</p>
+ipa_labels.query("voiced bilabial plosive", fields="symbol")</code></pre><p>Use <a href="https://github.com/congzhang365/IPA_labels/blob/main/python_package/TUTORIAL.md">the longer source tutorial</a> for custom data and error handling.</p>
 </main><footer><a href="../">Back to ipa-labels documentation</a></footer></div></body></html>

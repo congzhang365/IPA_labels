@@ -7,7 +7,8 @@ setup(
     package_data={"ipa_labels": ["data/*.json.gz", "data/*.json"]},
     include_package_data=True,
     install_requires=[],
-    author="Cong",
+    author="Cong Zhang",
+    author_email="cong.zhang@newcastle.ac.uk",
     license="MIT",
     description="A comprehensive IPA dictionary package with dynamic lookup functions",
     classifiers=[
