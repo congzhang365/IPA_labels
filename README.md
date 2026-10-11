@@ -15,6 +15,13 @@
   </tr>
 </table>
 
+<p align="center">
+  <a href="python_package/README.md"><img src="https://img.shields.io/badge/Python-package-3776AB?logo=python&logoColor=white" alt="Python package"></a>
+  <a href="r_package/ipa.labels/README.md"><img src="https://img.shields.io/badge/R-package-276DC3?logo=r&logoColor=white" alt="R package"></a>
+  <a href="python_package/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="MIT license"></a>
+  <a href="docs/index.html"><img src="https://img.shields.io/badge/docs-GitHub%20Pages-222222?logo=github" alt="Documentation"></a>
+</p>
+
 <p align="center"><strong>Comprehensive information about IPA symbols, in R and Python.</strong></p>
 
 <p align="center">
