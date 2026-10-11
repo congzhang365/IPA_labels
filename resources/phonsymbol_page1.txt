@@ -1,0 +1,132 @@
+This file lists IPA symbols and definitions with information about their Unicode characters.
+The list follows the organization of the IPA chart. 
+Each IPA symbol is given in three SIL Unicode phonetic fonts (DoulosSIL, GentiumPlus, CharisSILCompact).
+Each symbol is followed by its Unicode hex ID number, character set, and character name.
+Pulmonic Consonants
+Doul
+Gent
+Char hex
+where
+name
+IPA definition
+note
+p
+p
+p
+0070
+Basic Latin
+LATIN SMALL LETTER P
+vl bilabial plosive
+b
+b
+b
+0062
+Basic Latin
+LATIN SMALL LETTER B
+vd bilabial plosive
+m
+m
+m
+006D
+Basic Latin
+LATIN SMALL LETTER M
+vd bilabial nasal
+ʙ
+ʙ
+ʙ
+0299
+IPA Extensions
+LATIN LETTER SMALL CAPITAL B
+vd bilabial trill
+ɸ
+ɸ
+ɸ
+0278
+IPA Extensions
+LATIN SMALL LETTER PHI
+vl bilabial fricative
+β
+β
+β
+03B2
+Greek
+GREEK SMALL LETTER BETA
+vd bilabial fricative
+ɱ
+ɱ
+ɱ
+0271
+IPA Extensions
+LATIN SMALL LETTER M W/ HOOK
+vd labiodental nasal
+
+ⱱ
+ⱱ
+2C71
+Latin-Extended C
+LATIN SMALL LETTER V W/ RIGHT HOOK
+vd labiodental flap
+F25F in these fonts 
+f
+f
+f
+0067
+Basic Latin
+LATIN SMALL LETTER F
+vl labiodental fricative
+v
+v
+v
+0076
+Basic Latin
+LATIN SMALL LETTER V
+vd labiodental fricative
+ʋ
+ʋ
+ʋ
+028B
+IPA Extensions
+LATIN SMALL LETTER V W/ HOOK
+vd labiodental approximant
+t
+t
+t
+0074
+Basic Latin
+LATIN SMALL LETTER T
+vl alveolar plosive
+d
+d
+d
+0064
+Basic Latin
+LATIN SMALL LETTER D
+vd alveolar plosive
+n
+n
+n
+006E
+Basic Latin
+LATIN SMALL LETTER N
+vd alveolar nasal
+r
+r
+r
+0072
+Basic Latin
+LATIN SMALL LETTER R
+vd alveolar trill
+ɾ
+ɾ
+ɾ
+027E
+IPA Extensions
+LATIN SMALL LETTER R W/ FISHHOOK
+vd alveolar tap
+θ
+θ
+θ
+03B8
+Greek
+GREEK SMALL LETTER THETA
+vl dental fricative

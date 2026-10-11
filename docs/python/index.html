@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ipa-labels Python manual</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><div class="wrap"><header><a href="../"><img src="../assets/ipa-labels-logo.svg" alt="ipa-labels home"></a><nav><a href="../">Documentation home</a><a href="../r/">R manual</a><a href="../../python_package/README.md">Package README</a></nav></header><main>
+<p class="lead">A gentle, example-led introduction for researchers who are comfortable with Python basics but are new to this package.</p><h1>Python manual</h1>
+<div class="callout"><strong>Reading route:</strong> run the first example, learn the five groups, then choose either lookup, feature, or inventory work. You do not need to memorise the whole database.</div>
+<h2>Before the technical details</h2><p>Think of <code>ipa_labels</code> as a box of information cards. Each card describes one IPA symbol. The card for <code>p</code> tells you what kind of sound it is and gives you its different writing and coding systems.</p><p>The symbol is the thing you are looking up. A group is a section on its card. So <code>p.label.place</code> means: “on the card for <code>p</code>, open the label section and show me the place of articulation”.</p><p>You do not need to learn every field before starting. Ask one small question first, then explore the other sections of the same record.</p>
+<h2>1. Install and make a first query</h2><p>For a local checkout, install the package in editable mode:</p><pre><code>cd python_package
+py -3.12 -m pip install -e .</code></pre><p>Now ask for the record for <code>p</code>:</p><pre><code>import ipa_labels
+
+p = ipa_labels.get("p")
+print(p.symbol.ipa)
+print(p.label.full)</code></pre><p>The first line prints the symbol. The second gives a readable description: <em>voiceless bilabial plosive</em>.</p>
+<h2>2. Learn the five groups</h2><table><tr><th>Group</th><th>Use it for</th><th>Example</th></tr><tr><td><code>symbol</code></td><td>IPA and transcription spellings</td><td><code>p.symbol.ipa</code></td></tr><tr><td><code>code</code></td><td>Unicode, TIPA, AFII, and numeric codes</td><td><code>p.code.unicode</code></td></tr><tr><td><code>label</code></td><td>Human-readable IPA categories</td><td><code>p.label.place</code></td></tr><tr><td><code>features</code></td><td>PHOIBLE feature values</td><td><code>p.features.labial</code></td></tr><tr><td><code>description</code></td><td>Names and explanatory text</td><td><code>p.description.unicode_name</code></td></tr></table>
+<h2>3. Inspect one symbol</h2><pre><code>p = ipa_labels.get("p")
+
+# Symbol spellings
+p.symbol.ipa
+p.symbol.sampa
+p.symbol.arpabet
+
+# Codes
+p.code.tipa
+p.code.ipa_number
+p.code.unicode
+p.code.hex
+p.code.decimal
+p.code.unicode_range
+p.code.afii
+
+# Labels
+p.label.full
+p.label.type
+p.label.voicing
+p.label.place
+p.label.manner
+
+# Names
+p.description.ipa_name
+p.description.unicode_name
+p.description.text</code></pre><p>Some values are unavailable for some symbols. The structured Python interface represents those as <code>None</code>. For example, a vowel normally has no consonant place.</p>
+<h2>4. Vowels and consonants</h2><pre><code>vowel = ipa_labels.get("ɘ")
+print(vowel.label.height)       # close-mid
+print(vowel.label.closeness)    # close-mid (alias)
+print(vowel.label.frontness)    # central
+print(vowel.label.roundedness)  # unrounded
+
+consonant = ipa_labels.get("p")
+print(consonant.label.voicing)  # voiceless
+print(consonant.label.place)    # bilabial
+print(consonant.label.manner)   # plosive</code></pre><p><code>closeness</code> and <code>openness</code> are aliases for <code>height</code>; <code>backness</code> is an alias for <code>frontness</code>.</p>
+<h2>5. Find several symbols</h2><p>Use <code>lookup()</code> when you know the field you want. It returns a list because more than one symbol may match.</p><pre><code>matches = ipa_labels.lookup(
+    type="consonant",
+    place="bilabial",
+    fields=["symbol", "voicing", "manner"]
+)
+
+for match in matches:
+    print(match)</code></pre><p>Use <code>fields="symbol"</code> when you want a simple list. Grouped criteria are also supported:</p><pre><code>ipa_labels.lookup(label={"place": "bilabial"}, fields="symbol")
+ipa_labels.lookup(code={"unicode": "U+0070"}, fields="symbol")</code></pre>
+<h2>6. PHOIBLE features</h2><p>Labels and features answer different questions. <code>p.label.place</code> is a readable IPA label; <code>p.features.labial</code> is a structured PHOIBLE feature value.</p><pre><code>p = ipa_labels.get("p")
+for name in ["consonantal", "sonorant", "continuant", "nasal", "labial"]:
+    print(name, p.features[name])</code></pre><p>Feature values are normally <code>True</code>, <code>False</code>, or <code>None</code> when PHOIBLE does not provide a value.</p>
+<h2>7. Language inventories</h2><p>Inventories retain language, doculect, source, marginal status, and segment membership.</p><pre><code>english = ipa_labels.inventory(iso639_3="eng")
+
+for inv in english:
+    print(inv["inventory_id"], inv["language"], inv["source"])
+    for segment in inv["segments"]:
+        print(segment["symbol"], segment["marginal"])</code></pre><p>Other selectors are <code>language=</code>, <code>glottocode=</code>, and <code>inventory_id=</code>.</p>
+<h2>8. Keep the older API while you learn</h2><pre><code>ipa_labels.get("p", "place")
+ipa_labels.lookup(place="bilabial")
+ipa_labels.values("place", type="consonant", unique=True)
+ipa_labels.query("voiced bilabial plosive", fields="symbol")</code></pre><p>Use <a href="https://github.com/congzhang365/ipa-labels/blob/main/python_package/TUTORIAL.md">the longer source tutorial</a> for custom data and error handling.</p>
+</main><footer><a href="../">Back to ipa-labels documentation</a></footer></div></body></html>

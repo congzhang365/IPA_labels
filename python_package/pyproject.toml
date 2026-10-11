@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ipa_labels"
+version = "0.2.0"
+description = "A comprehensive IPA dictionary package with dynamic lookup functions"
+readme = "README.md"
+requires-python = ">=3.6"
+authors = [
+  { name = "Cong" }
+]
+license = { file = "LICENSE" }
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+ipa_labels = ["data/*.json.gz", "data/*.json"]

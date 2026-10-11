@@ -1,0 +1,12 @@
+{
+  "phoible": {
+    "version": "2.0.1",
+    "source": "https://github.com/cldf-datasets/phoible/releases/tag/v2.0.1",
+    "license": "CC BY 4.0",
+    "citation": "Moran, Steven and Daniel McCloy (eds.). 2019. PHOIBLE 2.0."
+  },
+  "unicode_blocks": {
+    "source": "https://www.unicode.org/Public/UCD/latest/ucd/Blocks.txt",
+    "description": "Unicode Character Database Blocks.txt"
+  }
+}

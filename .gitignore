@@ -1,0 +1,13 @@
+# Private master data: keep this local and never commit it.
+ipa_symbols.csv
+python_package/ipa_labels/data/ipa_symbols.csv
+r_package/ipa_labels/inst/extdata/ipa_symbols.csv
+
+# Local development files.
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.idea/
+.Rhistory
+.Rproj.user/

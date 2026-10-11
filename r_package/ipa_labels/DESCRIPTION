@@ -1,0 +1,11 @@
+Package: ipa_labels
+Title: Dynamic International Phonetic Alphabet Lookup Database
+Version: 0.2.0
+Author: Cong
+Maintainer: Cong <user@example.com>
+Description: A comprehensive, multilayered phonetic database and lookup utility for the International Phonetic Alphabet (IPA). Allows looking up IPA symbols by their descriptions, names, Hex/Decimal values, TIPA LaTeX macros, AF II codes, SAMPA/X-SAMPA, and ARPABET representations. Reads the underlying CSV file dynamically at runtime.
+License: MIT
+Encoding: UTF-8
+RoxygenNote: 7.2.3
+Depends: R (>= 3.5)
+Imports: utils, jsonlite

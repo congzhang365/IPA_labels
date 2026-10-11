@@ -1,0 +1,6 @@
+export(ipalookup)
+export(ipaquery)
+export(ipaget)
+export(ipavalues)
+export(ipainventory)
+importFrom(jsonlite,fromJSON)
